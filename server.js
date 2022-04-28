@@ -26,10 +26,12 @@ app.post("/api/notes", (req, res) => {
   var readme = fs.readFileSync(path.join(__dirname, "./db/db.json"), {encoding: "utf-8"})
   readme = JSON.parse(readme);
   readme.push(req.body);
+  console.log(typeof readme);
 
-  fs.writeFileSync(path.join(__dirname, "./db/db.json"), readme);
-  return res.json(readme);
+  // fs.writeFileSync(path.join(__dirname, "./db/db.json"), readme);
+  // return res.json(readme);
 })
+
 // HTML ROUTES
 //Set notes.html as notes page
 app.get("/notes", (req, res) => {
