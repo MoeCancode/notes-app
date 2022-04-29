@@ -2,6 +2,7 @@ const express = require("express");
 const { json } = require("express/lib/response");
 const fs = require("fs");
 const path = require("path");
+const uuid = require("./uuid/id")
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -22,14 +23,25 @@ app.get("/api/notes", (req, res) => {
 });
 
 app.post("/api/notes", (req, res) => {
-  console.log("this route ran")
+  
   var readme = fs.readFileSync(path.join(__dirname, "./db/db.json"), {encoding: "utf-8"})
   readme = JSON.parse(readme);
-  readme.push(req.body);
-  console.log(typeof readme);
+  const { title, text } = req.body;
+
+  if (title && text) {
+    // Variable for the object we will save
+    const noteWithId = {
+      title,
+      text,
+      note_id: uuid(),
+    };
+
+  readme.push(noteWithId);
+  // console.log(typeof readme);
+  }
 
   fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(readme));
-  // return res.json(readme);
+  return res.json(readme);
 })
 
 // HTML ROUTES
