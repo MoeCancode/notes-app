@@ -38,6 +38,9 @@ notesRouter.post("/", (req, res) => {
       JSON.stringify(readme)
     );
   }
+  else {
+      res.error("Note creation failed");
+  }
   return res.json(readme);
 });
 
