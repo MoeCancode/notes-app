@@ -48,7 +48,7 @@ app.post("/api/notes", (req, res) => {
   return res.json(readme);
 });
 
-app.delete("/api/notes/:id", (req, res) => {
+app.delete("/routes/notes/:id", (req, res) => {
   console.log("Dekh k delete kar dena")
   var noteId = req.params.id;
 
