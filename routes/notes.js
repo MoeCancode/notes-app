@@ -32,13 +32,12 @@ notesRouter.post("/", (req, res) => {
 
     readme.push(noteWithId);
     // console.log(typeof readme);
-  
 
-  fs.writeFileSync(
-    path.join(__dirname, "../db/db.json"),
-    JSON.stringify(readme)
-  );
-}
+    fs.writeFileSync(
+      path.join(__dirname, "../db/db.json"),
+      JSON.stringify(readme)
+    );
+  }
   return res.json(readme);
 });
 
@@ -51,23 +50,22 @@ notesRouter.delete("/:id", (req, res) => {
     encoding: "utf-8",
   });
   readdb = JSON.parse(readdb);
-  
 
   for (let i = 0; i < readdb.length; i++) {
-      console.log(readdb[i].id);
+    console.log(readdb[i].id);
     if (readdb[i].id == noteId) {
-      console.log("Hi there");
-      readdb = readdb.splice(i, 1);
+      var newArray = readdb.filter((data) => data.id !== noteId);
+      console.log(newArray);
 
       fs.writeFileSync(
         path.join(__dirname, "../db/db.json"),
-        JSON.stringify(readdb)
+        JSON.stringify(newArray)
       );
     } else {
-      console.log("oopsie");
+      console.log("Error");
     }
   }
-  return res.json(readdb);
+  return res.json(newArray);
 });
 
 module.exports = notesRouter;
