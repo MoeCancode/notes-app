@@ -28,7 +28,7 @@ app.post("/api/notes", (req, res) => {
   readme.push(req.body);
   console.log(typeof readme);
 
-  // fs.writeFileSync(path.join(__dirname, "./db/db.json"), readme);
+  fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(readme));
   // return res.json(readme);
 })
 
